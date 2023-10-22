@@ -1,0 +1,25 @@
+<div class="flex justify-between items-start mb-[10px]">
+  <div class="list-title">Manage information about clients</div>
+  <div class="flex items-end gap-4">
+    <nz-input-group style="width: 300px" nzSize="large" [nzAddOnBefore]="searchFieldTemplate" [nzSuffix]="iconsTemplate">
+      <input type="text" nz-input nzSize="large" [(ngModel)]="searchValue" (input)="changeField($event)" placeholder="type here .." />
+    </nz-input-group>
+    <ng-template #searchFieldTemplate>
+      <nz-select nzSize="large" [(ngModel)]="searchField" (ngModelChange)="changeType($event)">
+        <nz-option *ngFor="let option of searchFieldList" [nzValue]="option.value" [nzLabel]="option.title"></nz-option>
+      </nz-select>
+    </ng-template>
+    <ng-template #iconsTemplate>
+      <button class="flex" *ngIf="hasSearchValue" (click)="resetSearchField()">
+        <span nz-icon nzTheme="outline" nzType="close-circle"></span>
+      </button>
+      <span nz-icon nzSize="large" nzType="search"></span>
+    </ng-template>
+    <button nz-button nzSize="large" nzType="primary" (click)="formOpenControl.setValue(true)">New client</button>
+  </div>
+</div>
+<div class="flex justify-between items-start my-[10px]">
+  <nz-radio-group [formControl]="entityStatusControl">
+    <label nz-radio-button [nzValue]="item.value" *ngFor="let item of entityStatusList">{{ item.label }}</label>
+  </nz-radio-group>
+</div>
