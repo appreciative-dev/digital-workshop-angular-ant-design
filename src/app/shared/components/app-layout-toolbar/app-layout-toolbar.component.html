@@ -1,7 +1,13 @@
 <div class="flex justify-between items-start mb-[10px]">
-  <div class="list-title">Manage information about clients</div>
+  <div class="list-title">{{ toolbarSettings.title }}</div>
   <div class="flex items-end gap-4">
-    <nz-input-group style="width: 300px" nzSize="large" [nzAddOnBefore]="searchFieldTemplate" [nzSuffix]="iconsTemplate">
+    <nz-input-group
+      *ngIf="toolbarSettings.hasSearchBar"
+      style="width: 300px"
+      nzSize="large"
+      [nzAddOnBefore]="searchFieldTemplate"
+      [nzSuffix]="iconsTemplate"
+    >
       <input type="text" nz-input nzSize="large" [(ngModel)]="searchValue" (input)="changeField($event)" placeholder="type here .." />
     </nz-input-group>
     <ng-template #searchFieldTemplate>
@@ -15,10 +21,12 @@
       </button>
       <span nz-icon nzSize="large" nzType="search"></span>
     </ng-template>
-    <button nz-button nzSize="large" nzType="primary" (click)="formOpenControl.setValue(true)">New client</button>
+    <button *ngIf="toolbarSettings.buttonTitle" nz-button nzSize="large" nzType="primary" (click)="formOpenControl.setValue(true)">
+      {{ toolbarSettings.buttonTitle }}
+    </button>
   </div>
 </div>
-<div class="flex justify-between items-start my-[10px]">
+<div *ngIf="toolbarSettings.hasStatusBar" class="flex justify-between items-start my-[10px]">
   <nz-radio-group [formControl]="entityStatusControl">
     <label nz-radio-button [nzValue]="item.value" *ngFor="let item of entityStatusList">{{ item.label }}</label>
   </nz-radio-group>

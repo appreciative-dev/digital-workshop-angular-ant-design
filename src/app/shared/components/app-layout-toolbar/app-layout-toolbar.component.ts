@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core'
 import { FormControl } from '@angular/forms'
-import { FilterField } from '../../repository/repository.model'
 import { tap } from 'rxjs'
+import { Toolbar } from '../../model/toolbar.model'
+import { FilterField } from '../../repository/repository.model'
 
 @Component({
   selector: 'app-layout-toolbar',
@@ -10,6 +11,8 @@ import { tap } from 'rxjs'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppLayoutToolbarComponent implements OnInit {
+  @Input()
+  toolbarSettings: Toolbar
   @Input()
   searchControl: FormControl<FilterField>
   @Input()
@@ -32,8 +35,14 @@ export class AppLayoutToolbarComponent implements OnInit {
   constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.searchField = this.searchFieldList[0].value
-    this.updateSearchIconAppearance()
+    this.initSearchBar()
+  }
+
+  initSearchBar() {
+    if (this.toolbarSettings.hasSearchBar) {
+      this.searchField = this.searchFieldList[0].value
+      this.updateSearchIconAppearance()
+    }
   }
 
   changeType(field: string) {

@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core'
 import { FormControl } from '@angular/forms'
-import { Observable, filter, map, switchMap } from 'rxjs'
+import { Observable, filter, map, shareReplay, switchMap } from 'rxjs'
 import { NhtsaService } from '../../../shared/services/nhtsa.service'
 import { VehicleBodyType } from '../../utils/vehicle.model'
+import { SpareConstants } from '../../utils/spare.constants'
 
 @Component({
   selector: 'app-spare-list',
@@ -11,33 +12,25 @@ import { VehicleBodyType } from '../../utils/vehicle.model'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SpareListComponent implements OnInit {
+  readonly vehicleBodyType = VehicleBodyType
+  readonly toolbarSettings = SpareConstants.toolbarSettings
+
   bodyType: FormControl = new FormControl(null)
   vehicleName: FormControl = new FormControl(null)
-  modelName: FormControl = new FormControl(null)
-
-  desc
-  value
 
   vehiclesList$: Observable<any>
-  modelList$: Observable<any>
   manufacturerDetails$: Observable<any>
-
-  readonly vehicleBodyType = VehicleBodyType
 
   constructor(private nhtsaService: NhtsaService) {}
 
   ngOnInit() {
-    this.vehiclesList$ = this.bodyType.valueChanges.pipe(switchMap((val) => this.nhtsaService.getVehiclesByBodyType(val).pipe()))
-
+    this.vehiclesList$ = this.bodyType.valueChanges.pipe(
+      switchMap((value) => this.nhtsaService.getVehiclesByBodyType(value)),
+      shareReplay(1)
+    )
     this.manufacturerDetails$ = this.vehicleName.valueChanges.pipe(
       filter((value) => !!value),
-      map((val) => {
-        console.log(val)
-
-        return (this.manufacturerDetails$ = this.nhtsaService.getManufacturerDetails(val.MakeName).pipe(map((val) => val.Results)))
-      })
-      // switchMap((val) => this.nhtsaService.getVehicleModelsById(val.MakeId)),
-      // shareReplay(1)
+      switchMap((response) => this.nhtsaService.getManufacturerDetails(response.MakeName).pipe(map((manufacturer) => manufacturer.Results)))
     )
   }
 }

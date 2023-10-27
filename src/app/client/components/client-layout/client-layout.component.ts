@@ -11,6 +11,7 @@ import { ClientConstants } from '../../utils/client.constants'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ClientLayoutComponent {
+  readonly toolbarSettings = ClientConstants.toolbarSettings
   readonly searchControlInitialValue = ClientConstants.searchControlInitialValue
   readonly searchFieldList = ClientConstants.searchFieldList
   readonly entityStatusList = ClientConstants.entityStatusList

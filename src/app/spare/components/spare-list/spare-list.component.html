@@ -1,18 +1,14 @@
-<div class="flex justify-between items-center">
-  <div class="list-title">Find a spares supplier</div>
-</div>
+<app-layout-toolbar [toolbarSettings]="toolbarSettings"></app-layout-toolbar>
 
-<br />
-
-<div nz-row nzGutter="8">
-  <div nz-col nzSpan="12">
+<form nz-form nzLayout="inline">
+  <nz-form-item>
     <nz-select nzAllowClear nzPlaceHolder="Select a body type" [formControl]="bodyType">
       <nz-option *ngFor="let option of vehicleBodyType | keyvalue" [nzValue]="option.value" [nzLabel]="option.key.toUpperCase()">
         {{ option.value.toUpperCase() }}
       </nz-option>
     </nz-select>
-  </div>
-  <div nz-col nzSpan="12">
+  </nz-form-item>
+  <nz-form-item>
     <nz-select
       nzShowSearch
       nzAllowClear
@@ -25,15 +21,19 @@
         {{ option.MakeName }}
       </nz-option>
     </nz-select>
-  </div>
-</div>
+  </nz-form-item>
+</form>
 
-<ng-container *ngIf="manufacturerDetails$ | async as data; else loading">
-  <h2 nz-typography>{{ desc?.Make_Name }}</h2>
-  <h2>{{ desc?.Model_Name }}</h2>
-  <h2>{{ desc?.Model_ID }}</h2>
-
-  <nz-table #nzTable [nzData]="data" nzTableLayout="fixed" nzShowPagination="false" [nzFrontPagination]="false">
+<ng-container *ngIf="manufacturerDetails$ | async as data">
+  <nz-table
+    #nzTable
+    [nzScroll]="{ y: '50vh' }"
+    [nzData]="data"
+    [nzLoading]="!data"
+    nzTableLayout="fixed"
+    nzShowPagination="false"
+    [nzFrontPagination]="false"
+  >
     <thead>
       <tr>
         <th>Manufacturer</th>
@@ -52,7 +52,3 @@
     </tbody>
   </nz-table>
 </ng-container>
-
-<ng-template #loading>
-  <app-loader></app-loader>
-</ng-template>

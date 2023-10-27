@@ -18,6 +18,12 @@ interface NhtsaResponse {
 export class NhtsaService {
   constructor(private httpClient: HttpClient) {}
 
+  url = 'https://firestore.googleapis.com/v1/projects/auto-service-268f1/databases/(default)/documents/q?key=AIzaSyBQ5zT-RsmRL3O0GgjjzQjYmYiHg2MdKPs'
+
+  request() {
+    return this.httpClient.get(this.url)
+  }
+
   getVehiclesByBodyType(type: VehicleBodyType): Observable<NhtsaResponse> {
     return this.httpClient.get<NhtsaResponse>(BASE_URL + `GetMakesForVehicleType/${type}?format=json`)
   }
