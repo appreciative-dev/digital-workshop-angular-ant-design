@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core'
 import { FormControl } from '@angular/forms'
 import { Observable, filter, map, shareReplay, switchMap } from 'rxjs'
 import { NhtsaService } from '../../../shared/services/nhtsa.service'
-import { VehicleBodyType } from '../../utils/vehicle.model'
 import { SpareConstants } from '../../utils/spare.constants'
+import { VehicleBodyType } from '../../utils/spare.model'
 
 @Component({
   selector: 'app-spare-list',

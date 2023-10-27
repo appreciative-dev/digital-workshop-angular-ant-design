@@ -4,6 +4,11 @@ export interface FormUploadState<T> {
   error: Error
 }
 
+export interface ModalData<T> {
+  item: T
+  type: FormType
+}
+
 export enum FormInitialization {
   CLEAR = 'CLEAR',
   LOADING = 'LOADING',

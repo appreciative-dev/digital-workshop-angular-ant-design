@@ -18,7 +18,7 @@ export class ClientEffects {
       switchMap(({ item }) =>
         this.clientService.create<Client>(item).pipe(
           switchMap((response) =>
-            this.clientService.getTotalByStatus<ClientConstants>(item.status).pipe(
+            this.clientService.getTotalByStatus<ClientStatus>(item.status).pipe(
               map((total) => {
                 this.notificationService.notifyCreateSuccess(ClientConstants.notificationTitle)
                 return ClientActions.createClientSuccess({ response, total })
@@ -50,7 +50,7 @@ export class ClientEffects {
     this.actions$.pipe(
       ofType(ClientActions.updateClientStatus),
       switchMap(({ id, status }) =>
-        forkJoin([this.clientService.updateStatus<ClientStatus>(id, status), this.clientService.log<Client>({ status: status })]).pipe(
+        forkJoin([this.clientService.updateStatus<ClientStatus>(id, status), this.clientService.log<Client>({ status })]).pipe(
           map(() => {
             this.notificationService.notifyEditSuccess(ClientConstants.notificationTitle)
             return ClientActions.updateClientSuccess()
@@ -76,7 +76,7 @@ export class ClientEffects {
               responseTransform(this.notificationService),
               switchMap((response) =>
                 this.clientService
-                  .getTotalByStatus<ClientConstants>(status)
+                  .getTotalByStatus<ClientStatus>(status)
                   .pipe(map((total) => ClientActions.getClientsSuccess({ response, query: 'first', total })))
               ),
               catchError((error) => of(ClientActions.notifyError({ error, errorType: 'list' })))

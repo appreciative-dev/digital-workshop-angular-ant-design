@@ -4,22 +4,22 @@ import { Observable, delay, forkJoin, map, of, tap, concat, filter } from 'rxjs'
 import { Store } from '@ngrx/store'
 import { fadeInOnEnterAnimation } from 'angular-animations'
 import { NZ_MODAL_DATA, NzModalRef } from 'ng-zorro-antd/modal'
-import { Client, ClientForm, ClientFormVehicleSelect, ClientStatus } from '../../utils/client.model'
+import { Client, ClientForm, ClientFormVehicleSelect, ClientModalData, ClientStatus } from '../../utils/order.model'
 import { NhtsaService } from 'src/app/shared/services/nhtsa.service'
-import { ClientActions } from '../../store/client.actions'
-import { VehicleBodyType, VehicleBrand, VehicleModel } from 'src/app/spare/utils/spare.model'
-import { ClientConstants } from '../../utils/client.constants'
-import { getFormUploadState } from '../../store/client.selectors'
-import { FormAction, FormInitialization, FormType, FormUploadState, ModalData } from 'src/app/shared/model/form.model'
+import { ClientActions } from '../../store/order.actions'
+import { VehicleBodyType, VehicleBrand, VehicleModel } from 'src/app/spare/utils/vehicle.model'
+import { ClientConstants } from '../../utils/order.constants'
+import { getFormUploadState } from '../../store/order.selectors'
+import { FormAction, FormInitialization, FormType, FormUploadState } from 'src/app/shared/model/form.model'
 import { ConfirmationService } from 'src/app/shared/services/confirmation.service'
 import { Log, RepositoryResponseEntity } from 'src/app/shared/repository/repository.model'
-import * as ClientSelectors from '../../store/client.selectors'
+import * as ClientSelectors from '../../store/order.selectors'
 import { generatePdf } from '../../utils/generate-pdf'
 
 @Component({
-  selector: 'app-client-form',
-  templateUrl: './client-form.component.html',
-  styleUrls: ['./client-form.component.scss'],
+  selector: 'app-order-form',
+  templateUrl: './order-form.component.html',
+  styleUrls: ['./order-form.component.scss'],
   animations: [fadeInOnEnterAnimation()],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -35,7 +35,7 @@ export class ClientFormComponent implements OnInit {
   vehicleListByIndexMap = new Map()
   modelListByIndexMap = new Map()
 
-  readonly modalData: ModalData<Client> = inject(NZ_MODAL_DATA)
+  readonly modalData: ClientModalData = inject(NZ_MODAL_DATA)
   readonly phoneMaskConfig = ClientConstants.phoneMaskConfig
   readonly FormType = FormType
   readonly vehicleBodyType = VehicleBodyType
@@ -50,8 +50,6 @@ export class ClientFormComponent implements OnInit {
     private store$: Store,
     private modal: NzModalRef,
     private confirmationService: ConfirmationService,
-    private nhtsaService: NhtsaService,
-    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -110,39 +108,6 @@ export class ClientFormComponent implements OnInit {
     })
   }
 
-  requestVehicleData(i: number, type: ClientFormVehicleSelect, value: any) {
-    if (value) {
-      switch (type) {
-        case ClientFormVehicleSelect.TYPE:
-          this.nhtsaService
-            .getVehiclesByBodyType(value)
-            .pipe(
-              // takeUntilDestroyed(),
-              tap((value) => {
-                this.vehicleListByIndexMap.set(i, value.Results)
-                this.form.controls.vehicles.at(i).patchValue({ brand: null, model: null })
-                this.cdr.markForCheck()
-              })
-            )
-            .subscribe()
-          break
-        case ClientFormVehicleSelect.BRAND:
-          this.nhtsaService
-            .getVehicleModelsById(value?.MakeId)
-            .pipe(
-              // takeUntilDestroyed(),
-              tap((value) => {
-                this.modelListByIndexMap.set(i, value.Results)
-                this.form.controls.vehicles.at(i).patchValue({ model: null })
-                this.cdr.markForCheck()
-              })
-            )
-            .subscribe()
-          break
-      }
-    }
-  }
-
   initForm() {
     this.form = new FormGroup({
       name: new FormControl('', Validators.required),
@@ -160,40 +125,13 @@ export class ClientFormComponent implements OnInit {
             id: this.editFormId,
           })
         )
-        this.initLog()
       }
-      this.requestExtraFormData()
     } else {
       this.formInitializationState$ = concat(of(FormInitialization.CLEAR), of(FormInitialization.LOADED).pipe(delay(60)))
     }
   }
 
-  initLog() {
-    this.store$
-      .select(ClientSelectors.getClientLog)
-      .pipe(
-        filter((value) => !!value),
-        tap((value) => (this.clientLog = value))
-      )
-      .subscribe()
-  }
 
-  requestExtraFormData() {
-    this.editFormValue.vehicles.forEach(() => this.form.controls.vehicles.push(this.addVehicleFormRow()))
-    this.form.patchValue(this.editFormValue)
-    this.form.controls.vehicles.removeAt(this.editFormValue.vehicles.length)
-    this.formInitializationState$ = concat(
-      of(FormInitialization.LOADING),
-      forkJoin(
-        this.editFormValue.vehicles.map((el, i) =>
-          forkJoin([
-            this.nhtsaService.getVehiclesByBodyType(el.type).pipe(tap((value) => this.vehicleListByIndexMap.set(i, value.Results))),
-            this.nhtsaService.getVehicleModelsById(el.brand.MakeId).pipe(tap((value) => this.modelListByIndexMap.set(i, value.Results))),
-          ])
-        )
-      ).pipe(map(() => FormInitialization.LOADED))
-    )
-  }
 
   addVehicleFormRow() {
     return new FormGroup({
@@ -207,7 +145,7 @@ export class ClientFormComponent implements OnInit {
 
   addRow(event: Event) {
     event.preventDefault()
-    this.form.controls.vehicles.push(this.addVehicleFormRow())
+    this.form.controls..push(this.addVehicleFormRow())
   }
 
   removeRow(i: number) {
@@ -229,28 +167,4 @@ export class ClientFormComponent implements OnInit {
     }
   }
 
-  archive() {
-    const status: ClientStatus = this.modalData.item.status === 'active' ? 'archived' : 'active'
-    this.confirmationService
-      .confirm({
-        title: `Change client status to ${status}?`,
-      })
-      .afterClose.pipe(
-        // takeUntilDestroyed(),
-        filter((value) => !!value),
-        tap(() =>
-          this.store$.dispatch(
-            ClientActions.updateClientStatus({
-              id: this.editFormId,
-              status: status,
-            })
-          )
-        )
-      )
-      .subscribe()
-  }
-
-  downloadPdf() {
-    generatePdf(this.editFormValue, this.clientLog)
-  }
 }

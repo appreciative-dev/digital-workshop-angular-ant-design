@@ -18,7 +18,6 @@ export const ClientActions = createActionGroup({
     'Update Client Success': emptyProps(),
     'Get Client Log': props<{ id: string }>(),
     'Get Client Log Success': props<{ log: any }>(),
-    'Create Client List': props<{ item: Client }>(),
     'Get Clients': props<{ request: RepositoryRequest<Client, ClientStatus> }>(),
     'Get Clients Success': props<{ response: Client[]; query: RepositoryRequestQuery; total?: number }>(),
     'Notify Error': props<{ error: Error; errorType: RepositoryResponseCategory }>(),

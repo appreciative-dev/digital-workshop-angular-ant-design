@@ -2,12 +2,6 @@ import { PaginationRequest } from '../model/pagination.model'
 
 export type RepositoryEntityStatus = 'active' | 'archived'
 
-export interface RepositoryEntityRef {
-  id: string
-  timestamp?: Date
-  updated?: Date
-}
-
 export interface RepositoryResponseEntity {
   id: string
 }
