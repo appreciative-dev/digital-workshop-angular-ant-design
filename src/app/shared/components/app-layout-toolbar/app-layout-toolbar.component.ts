@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } 
 import { FormControl } from '@angular/forms'
 import { tap } from 'rxjs'
 import { Toolbar } from '../../model/toolbar.model'
-import { FilterField } from '../../repository/repository.model'
+import { FilterField, RepositoryEntityAction } from '../../repository/repository.model'
 
 @Component({
   selector: 'app-layout-toolbar',
@@ -18,7 +18,7 @@ export class AppLayoutToolbarComponent implements OnInit {
   @Input()
   hasSearchValueControl: FormControl<boolean>
   @Input()
-  formOpenControl: FormControl
+  actionsControl: FormControl<RepositoryEntityAction>
   @Input()
   entityStatusControl: FormControl
   @Input()

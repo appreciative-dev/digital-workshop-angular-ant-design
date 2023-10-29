@@ -1,3 +1,5 @@
+import { FormGroup } from '@angular/forms'
+
 export interface FormUploadState<T> {
   loading: boolean
   loaded?: T | boolean
@@ -25,4 +27,31 @@ export enum FormType {
 export enum FormAction {
   ADD = 'Add',
   EDIT = 'Edit',
+}
+
+export interface FormControlValidator {
+  name: string
+  message: string
+  value: number
+}
+
+export interface FormLayout<T> {
+  formControls: Array<CustomFormControl>
+  formGroup: FormGroup
+  formData?: T
+}
+
+export interface CustomFormControl {
+  key: string
+  type: string
+  label: string
+  placeholder: string
+  validations: Array<FormControlValidator>
+  mask: FormControlMask
+  options: Array<string>
+}
+
+export interface FormControlMask {
+  type: string
+  pattern: string
 }

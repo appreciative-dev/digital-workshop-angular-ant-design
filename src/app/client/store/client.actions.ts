@@ -4,7 +4,7 @@ import {
   Log,
   RepositoryRequest,
   RepositoryRequestQuery,
-  RepositoryResponseCategory,
+  RepositoryEntityAction,
   RepositoryResponseEntity,
 } from 'src/app/shared/repository/repository.model'
 
@@ -20,7 +20,7 @@ export const ClientActions = createActionGroup({
     'Get Client Log Success': props<{ log: any }>(),
     'Get Clients': props<{ request: RepositoryRequest<Client, ClientStatus> }>(),
     'Get Clients Success': props<{ response: Client[]; query: RepositoryRequestQuery; total?: number }>(),
-    'Notify Error': props<{ error: Error; errorType: RepositoryResponseCategory }>(),
+    'Notify Error': props<{ error: Error; errorType: RepositoryEntityAction }>(),
     'Reset Form State': emptyProps(),
     'Reset List State': emptyProps(),
   },

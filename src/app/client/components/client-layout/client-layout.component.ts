@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { FormControl } from '@angular/forms'
 import { ClientStatus } from '../../utils/client.model'
-import { FilterField } from 'src/app/shared/repository/repository.model'
+import { FilterField, RepositoryEntityAction } from 'src/app/shared/repository/repository.model'
 import { ClientConstants } from '../../utils/client.constants'
 
 @Component({
@@ -17,7 +17,7 @@ export class ClientLayoutComponent {
   readonly entityStatusList = ClientConstants.entityStatusList
   readonly entityStatusControlInitialValue = ClientConstants.entityStatusControlInitialValue
   searchControl: FormControl<FilterField> = new FormControl(this.searchControlInitialValue)
-  formOpenControl: FormControl<boolean> = new FormControl(false)
+  actionsControl: FormControl<RepositoryEntityAction> = new FormControl(null)
   entityStatusControl: FormControl<ClientStatus> = new FormControl(this.entityStatusControlInitialValue)
   hasSearchValueControl: FormControl<boolean> = new FormControl(false)
 }

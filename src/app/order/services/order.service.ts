@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Observable, tap } from 'rxjs'
+import { Observable } from 'rxjs'
 import { RepositoryService } from 'src/app/shared/repository/repository.service'
 import { OrderRequest, RepositoryResponseEntity } from 'src/app/shared/repository/repository.model'
 import { OrderConstants } from '../utils/order.constants'
@@ -7,7 +7,6 @@ import { OrderConstants } from '../utils/order.constants'
 @Injectable()
 export class OrderService {
   readonly collection = OrderConstants.collectionName
-  readonly collectionLog = OrderConstants.collectionName + '_log'
 
   constructor(private repositoryService: RepositoryService) {}
 
@@ -17,10 +16,6 @@ export class OrderService {
 
   getById<T>(id: string): Observable<T> {
     return this.repositoryService.getDocumentById(this.collection, id)
-  }
-
-  getLog<T>(order: OrderRequest, id: string): Observable<T[]> {
-    return this.repositoryService.getAllDocumentsByStrictQuery(this.collectionLog, order, 'id', id)
   }
 
   getTotalByStatus<S>(status: S): Observable<number> {
@@ -47,8 +42,8 @@ export class OrderService {
     return this.repositoryService.createDocument<T>(this.collection, item)
   }
 
-  updateRef<T>(id: string, status: T): Observable<void> {
-    return this.repositoryService.updateDocument(this.collection, { status: status }, id)
+  createOrder<T>(item: T): Observable<RepositoryResponseEntity> {
+    return this.repositoryService.createDocument<T>(this.collection, item)
   }
 
   update<T>(item: T, id: string): Observable<void> {
@@ -57,9 +52,5 @@ export class OrderService {
 
   updateStatus<T>(id: string, status: T): Observable<void> {
     return this.repositoryService.updateDocument(this.collection, { status: status }, id)
-  }
-
-  log<T>(item: T): Observable<RepositoryResponseEntity> {
-    return this.repositoryService.createDocument(this.collectionLog, item)
   }
 }

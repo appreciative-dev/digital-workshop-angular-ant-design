@@ -9,7 +9,13 @@ import { FormType, FormUploadState } from 'src/app/shared/model/form.model'
 import { ClientActions } from '../../store/client.actions'
 import * as ClientSelectors from '../../store/client.selectors'
 import { ClientConstants } from '../../utils/client.constants'
-import { FilterField, OrderRequest, RepositoryRequest, RepositoryResponseEntity } from 'src/app/shared/repository/repository.model'
+import {
+  FilterField,
+  OrderRequest,
+  RepositoryEntityAction,
+  RepositoryRequest,
+  RepositoryResponseEntity,
+} from 'src/app/shared/repository/repository.model'
 import { ActivatedRoute } from '@angular/router'
 import { PaginationRequest, PaginationResponse } from 'src/app/shared/model/pagination.model'
 import { NzTableQueryParams } from 'ng-zorro-antd/table'
@@ -38,7 +44,7 @@ export class ClientListComponent implements OnInit {
   @Input()
   hasSearchValueControl: FormControl<boolean>
   @Input()
-  formOpenControl: FormControl<boolean>
+  actionsControl: FormControl<RepositoryEntityAction>
   @Input()
   entityStatusControl: FormControl<ClientStatus>
   paginationControl: FormControl<PaginationRequest<Client>> = new FormControl(this.paginationControlInitialValue)
@@ -86,7 +92,7 @@ export class ClientListComponent implements OnInit {
   }
 
   initFormControls() {
-    this.formOpenControl.valueChanges
+    this.actionsControl.valueChanges
       .pipe(
         filter((value) => !!value),
         tap(() => this.open(FormType.CREATE))

@@ -1,6 +1,14 @@
 import { PaginationRequest } from '../model/pagination.model'
 
+export interface RepositoryEntity {
+  id?: string
+  timestamp?: Date
+  updated?: Date
+  status?: RepositoryEntityStatus
+}
+
 export type RepositoryEntityStatus = 'active' | 'archived'
+export type RepositoryEntityAction = 'create' | 'edit' | 'list' | 'detail' | 'status' | 'log'
 
 export interface RepositoryResponseEntity {
   id: string
@@ -11,8 +19,6 @@ export interface RepositoryResponseList<T> {
   total?: number
   current?: number
 }
-
-export type RepositoryResponseCategory = 'create' | 'edit' | 'list' | 'detail' | 'status' | 'log'
 
 export type RepositoryRequestQuery = 'first' | 'next' | 'previous' | 'custom'
 

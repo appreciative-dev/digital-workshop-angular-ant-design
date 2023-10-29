@@ -8,9 +8,11 @@ import { NgZorroAntdModule } from '../shared/design-system/ng-zorro.module'
 import { SharedModule } from '../shared/shared.module'
 import { OrderService } from './services/order.service'
 import { OrderLayoutComponent } from './components/order-layout/order-layout.component'
+import { OrderListComponent } from './components/order-list/order-list.component'
+import { OrderFormComponent } from './components/order-form/order-form.component'
 
 @NgModule({
-  declarations: [OrderLayoutComponent],
+  declarations: [OrderLayoutComponent, OrderListComponent, OrderFormComponent],
   imports: [RouterModule, CommonModule, NgZorroAntdModule, ReactiveFormsModule, FormsModule, OrderRoutingModule, TranslateModule, SharedModule],
   providers: [OrderService],
 })

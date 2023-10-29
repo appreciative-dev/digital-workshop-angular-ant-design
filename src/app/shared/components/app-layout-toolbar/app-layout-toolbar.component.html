@@ -21,7 +21,7 @@
       </button>
       <span nz-icon nzSize="large" nzType="search"></span>
     </ng-template>
-    <button *ngIf="toolbarSettings.buttonTitle" nz-button nzSize="large" nzType="primary" (click)="formOpenControl.setValue(true)">
+    <button *ngIf="toolbarSettings.buttonTitle" nz-button nzSize="large" nzType="primary" (click)="actionsControl.setValue('create')">
       {{ toolbarSettings.buttonTitle }}
     </button>
   </div>
