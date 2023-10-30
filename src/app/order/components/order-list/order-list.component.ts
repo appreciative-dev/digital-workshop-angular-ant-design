@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core'
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core'
+import { Observable } from 'rxjs'
+import { Order, OrderLayoutService } from '../../utils/order.model'
 
 @Component({
   selector: 'app-order-list',
@@ -7,6 +9,13 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrderListComponent implements OnInit {
-  listData: any
-  ngOnInit(): void {}
+  /** Layout inputs */
+  @Input()
+  layoutService: OrderLayoutService
+
+  /** List properties*/
+  listData$: Observable<Order[]>
+  ngOnInit(): void {
+    this.listData$ = this.layoutService.getAll<Order>()
+  }
 }

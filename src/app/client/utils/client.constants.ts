@@ -16,7 +16,7 @@ export abstract class ClientConstants {
   static readonly paginationSize = [3, 5, 10]
   static readonly toolbarSettings: Toolbar = {
     title: 'Manage information about clients',
-    buttonTitle: 'New client',
+    formButtonTitle: 'New client',
     hasSearchBar: true,
     hasStatusBar: true,
   }

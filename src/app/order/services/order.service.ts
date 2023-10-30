@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { RepositoryService } from 'src/app/shared/repository/repository.service'
-import { OrderRequest, RepositoryResponseEntity } from 'src/app/shared/repository/repository.model'
+import { OrderRequest, RepositoryLayoutService, RepositoryResponseEntity } from 'src/app/shared/repository/repository.model'
 import { OrderConstants } from '../utils/order.constants'
 
 @Injectable()
-export class OrderService {
+export class OrderService implements RepositoryLayoutService {
   readonly collection = OrderConstants.collectionName
 
   constructor(private repositoryService: RepositoryService) {}

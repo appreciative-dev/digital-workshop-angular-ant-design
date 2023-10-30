@@ -1,6 +1,7 @@
 export interface Toolbar {
   title: string
-  buttonTitle?: string
+  formButtonTitle?: string
+  listButtonTitle?: string
   hasSearchBar?: boolean
   hasStatusBar?: boolean
 }

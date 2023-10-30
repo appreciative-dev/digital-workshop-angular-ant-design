@@ -16,6 +16,7 @@ import { AppConfirmationModal } from './components/app-confirmation-modal/app-co
 import { AppLayoutToolbarComponent } from './components/app-layout-toolbar/app-layout-toolbar.component'
 import { TimestampPipe } from './utils/date.pipe'
 import { FormComponent } from './components/app-form/app-form.component'
+import { ListComponent } from './components/app-list/app-list.component'
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { FormComponent } from './components/app-form/app-form.component'
     AppLayoutToolbarComponent,
     TimestampPipe,
     FormComponent,
+    ListComponent,
   ],
   exports: [
     NgZorroAntdModule,
@@ -39,6 +41,7 @@ import { FormComponent } from './components/app-form/app-form.component'
     AppLayoutToolbarComponent,
     TimestampPipe,
     FormComponent,
+    ListComponent,
   ],
   imports: [RouterModule, CommonModule, NgZorroAntdModule, FormsModule, ReactiveFormsModule, TranslateModule],
   providers: [

@@ -1,4 +1,4 @@
-<div class="flex justify-between items-start mb-[10px]">
+<div class="flex justify-between items-center mb-[10px]">
   <div class="list-title">{{ toolbarSettings.title }}</div>
   <div class="flex items-end gap-4">
     <nz-input-group
@@ -21,9 +21,14 @@
       </button>
       <span nz-icon nzSize="large" nzType="search"></span>
     </ng-template>
-    <button *ngIf="toolbarSettings.buttonTitle" nz-button nzSize="large" nzType="primary" (click)="actionsControl.setValue('create')">
-      {{ toolbarSettings.buttonTitle }}
-    </button>
+    <div class="flex items-end gap-2">
+      <button *ngIf="toolbarSettings.formButtonTitle" nz-button nzType="text" (click)="actionsControl.setValue('create')">
+        {{ toolbarSettings.formButtonTitle }}
+      </button>
+      <button *ngIf="toolbarSettings.listButtonTitle" nz-button nzType="text" (click)="actionsControl.setValue('list')">
+        {{ toolbarSettings.listButtonTitle }}
+      </button>
+    </div>
   </div>
 </div>
 <div *ngIf="toolbarSettings.hasStatusBar" class="flex justify-between items-start my-[10px]">

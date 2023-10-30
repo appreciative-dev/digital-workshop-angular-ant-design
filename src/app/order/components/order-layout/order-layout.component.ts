@@ -2,8 +2,9 @@ import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/cor
 import { OrderConstants } from '../../utils/order.constants'
 import { FormControl } from '@angular/forms'
 import { RepositoryEntityAction } from 'src/app/shared/repository/repository.model'
-import { ActivatedRoute, Router } from '@angular/router'
-import { filter, tap } from 'rxjs'
+import { startWith, tap } from 'rxjs'
+import { OrderService } from '../../services/order.service'
+import { OrderLayoutService } from '../../utils/order.model'
 
 @Component({
   selector: 'app-order-layout',
@@ -12,17 +13,26 @@ import { filter, tap } from 'rxjs'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrderLayoutComponent implements OnInit {
+  /** Layout service*/
+  readonly layoutService: OrderLayoutService = inject(OrderService)
+
+  /** Constants properties */
   readonly toolbarSettings = OrderConstants.toolbarSettings
-  readonly router: Router = inject(Router)
-  readonly activatedRoute: ActivatedRoute = inject(ActivatedRoute)
-  readonly actionsControl: FormControl<RepositoryEntityAction>
-  listData
+  readonly formUrl: string = OrderConstants.formTemplate
+
+  /** Layout controls*/
+  readonly actionsControl: FormControl<RepositoryEntityAction> = new FormControl('create')
+  isFormLayout: boolean
+  isListLayout: boolean
+
   ngOnInit(): void {
     this.actionsControl?.valueChanges
       .pipe(
-        filter((value) => !!value),
+        startWith(this.actionsControl.value),
         tap((value) => {
-          this.router.navigate([`./${value}`], { relativeTo: this.activatedRoute })
+          this.isFormLayout = false
+          this.isListLayout = false
+          value === 'create' ? (this.isFormLayout = true) : (this.isListLayout = true)
         })
       )
       .subscribe()
