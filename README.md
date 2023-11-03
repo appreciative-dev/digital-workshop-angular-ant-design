@@ -7,7 +7,7 @@ Table layout is available to switch between different statuses of Client, and
 
 App is available on hosting URL: [https://digital-workshop-758a4.web.app](https://digital-workshop-758a4.web.app).
 
-## Development bootstrap
+## Development
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.3. Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 
