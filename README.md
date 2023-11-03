@@ -1,7 +1,7 @@
 # Digital Workshop
 
 User could login and add clients with related vehicles. Clients could be modified (changing name, edit existed and add new vehicles). It is possible to create a report of all changes made with a client.
-Table layout is available to switch between different statuses of Client, and
+Table layout is available to switch between different statuses of Client, changing page, page size, sorting.
 
 ## Live demo
 
