@@ -1,8 +1,8 @@
 # Digital Workshop
 
-## DEMO
+## Live demo
 
-App is available on hosting URL: `https://digital-workshop-758a4.web.app`
+App is available on hosting URL: [https://digital-workshop-758a4.web.app](https://digital-workshop-758a4.web.app).
 
 ## Project description
 
