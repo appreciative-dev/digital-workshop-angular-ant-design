@@ -11,9 +11,8 @@ export class AuthGuard {
     if (this.authService?.user) {
       return true
     } else {
-      // this.router.navigate(['auth'])
-      // return false
-      return true
+      this.router.navigate(['auth'])
+      return false
     }
   }
 }
