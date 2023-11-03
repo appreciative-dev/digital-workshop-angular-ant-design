@@ -21,7 +21,7 @@ export class ClientEffects {
             this.clientService.getTotalByStatus<ClientStatus>(item.status).pipe(
               map((total) => {
                 this.notificationService.notifyCreateSuccess(ClientConstants.notificationTitle)
-                return ClientActions.createClientSuccess({ response, total })
+                return ClientActions.createClientSuccess({ response: response.id, total })
               }),
               catchError((error) => of(ClientActions.notifyError({ error, errorType: 'create' })))
             )

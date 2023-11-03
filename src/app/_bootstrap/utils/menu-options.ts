@@ -5,7 +5,12 @@ interface MenuOption {
   roles?: string[]
 }
 
-export const MENU_OPTIONS: Array<MenuOption> = [
+export const menuOptions: Array<MenuOption> = [
+  {
+    title: 'Users',
+    icon: 'user',
+    link: 'users',
+  },
   {
     title: 'Clients',
     icon: 'meh',
@@ -20,13 +25,5 @@ export const MENU_OPTIONS: Array<MenuOption> = [
     title: 'Orders',
     icon: 'car',
     link: 'orders',
-  },
-]
-
-export const CLIENT_MENU_OPTIONS: Array<MenuOption> = [
-  {
-    title: 'Info',
-    icon: 'info',
-    link: 'info',
   },
 ]

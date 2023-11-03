@@ -1,6 +1,6 @@
 <div class="flex justify-between items-center mb-[10px]">
   <div class="list-title">{{ toolbarSettings.title }}</div>
-  <div class="flex items-end gap-4">
+  <div class="flex items-center gap-4">
     <nz-input-group
       *ngIf="toolbarSettings.hasSearchBar"
       style="width: 300px"
@@ -22,7 +22,7 @@
       <span nz-icon nzSize="large" nzType="search"></span>
     </ng-template>
     <div class="flex items-end gap-2">
-      <button *ngIf="toolbarSettings.formButtonTitle" nz-button nzType="text" (click)="actionsControl.setValue('create')">
+      <button *ngIf="toolbarSettings.formButtonTitle" nz-button nzType="primary" (click)="actionsControl.setValue('create')">
         {{ toolbarSettings.formButtonTitle }}
       </button>
       <button *ngIf="toolbarSettings.listButtonTitle" nz-button nzType="text" (click)="actionsControl.setValue('list')">

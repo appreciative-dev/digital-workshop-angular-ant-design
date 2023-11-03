@@ -1,6 +1,6 @@
 import { AppModule } from './app/_bootstrap/app.module'
-import './polyfills'
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic'
+import './polyfills'
 
 platformBrowserDynamic()
   .bootstrapModule(AppModule)

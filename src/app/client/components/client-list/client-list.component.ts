@@ -52,7 +52,7 @@ export class ClientListComponent implements OnInit {
 
   readonly listDownloadState$: Observable<FormUploadState<RepositoryResponseEntity>> = this.store$.select(ClientSelectors.getListDownloadState)
   readonly paginationPayload$: Observable<PaginationResponse<Client>> = this.store$.select(ClientSelectors.getPaginationResponse)
-  readonly formUploadState$: Observable<FormUploadState<RepositoryResponseEntity>> = this.store$.select(ClientSelectors.getFormUploadState)
+  readonly formUploadState$: Observable<FormUploadState<string>> = this.store$.select(ClientSelectors.getFormUploadState)
   readonly tableData$: Observable<Client[]> = this.store$.select(ClientSelectors.getClients)
 
   ngOnInit() {

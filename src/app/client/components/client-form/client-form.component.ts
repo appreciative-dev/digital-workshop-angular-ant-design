@@ -12,7 +12,7 @@ import { ClientConstants } from '../../utils/client.constants'
 import { getFormUploadState } from '../../store/client.selectors'
 import { FormAction, FormInitialization, FormType, FormUploadState, ModalData } from 'src/app/shared/model/form.model'
 import { ConfirmationService } from 'src/app/shared/services/confirmation.service'
-import { Log, RepositoryResponseEntity } from 'src/app/shared/repository/repository.model'
+import { Log } from 'src/app/shared/repository/repository.model'
 import * as ClientSelectors from '../../store/client.selectors'
 import { generatePdf } from '../../utils/generate-pdf'
 
@@ -42,7 +42,7 @@ export class ClientFormComponent implements OnInit {
   readonly ClientFormVehicleSelect = ClientFormVehicleSelect
   readonly FormInitialization = FormInitialization
 
-  readonly getFormUploadState$: Observable<FormUploadState<RepositoryResponseEntity>> = this.store$
+  readonly getFormUploadState$: Observable<FormUploadState<string>> = this.store$
     .select(getFormUploadState)
     .pipe(tap((value) => this.updateFormTemplate(value)))
 
@@ -222,7 +222,7 @@ export class ClientFormComponent implements OnInit {
 
   compareModel = (o1: VehicleModel, o2: VehicleModel) => (o1 && o2 ? o1.Model_Name === o2.Model_Name : o1 === o2)
 
-  updateFormTemplate(value: FormUploadState<RepositoryResponseEntity>) {
+  updateFormTemplate(value: FormUploadState<string>) {
     if (value.loaded && !value.loading) {
       this.modal.close(true)
       this.store$.dispatch(ClientActions.resetFormState())

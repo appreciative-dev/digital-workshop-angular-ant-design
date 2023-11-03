@@ -37,16 +37,18 @@
     <thead>
       <tr>
         <th>Manufacturer</th>
-        <th>Country</th>
+        <th>Country, City</th>
         <th>Phone</th>
+        <th>Email</th>
       </tr>
     </thead>
     <tbody>
       <ng-container *ngFor="let item of nzTable.data">
         <tr>
           <td>{{ item.Mfr_Name }}</td>
-          <td>{{ item.Country }}</td>
+          <td>{{ item.Country }}, {{ item.City }}</td>
           <td>{{ item.ContactPhone }}</td>
+          <td>{{ item.ContactEmail }}</td>
         </tr>
       </ng-container>
     </tbody>

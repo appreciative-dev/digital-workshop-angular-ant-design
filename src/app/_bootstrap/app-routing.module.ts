@@ -4,6 +4,7 @@ import { NavbarComponent } from './components/navbar/navbar.component'
 import { IndexComponent } from './components/index/index.component'
 import { AuthGuard } from '../auth/services/guard.service'
 import { AppNotFoundComponent } from '../shared/components/app-not-found/app-not-found.component'
+import { UsersComponent } from '../auth/components/users/users.component'
 
 export const ROUTES: Routes = [
   {
@@ -22,6 +23,10 @@ export const ROUTES: Routes = [
       {
         path: 'spares',
         loadChildren: () => import('../spare/spare.module').then((m) => m.VehicleModule),
+      },
+      {
+        path: 'users',
+        component: UsersComponent,
       },
       {
         path: 'orders',

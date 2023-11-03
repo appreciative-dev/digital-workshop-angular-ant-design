@@ -32,8 +32,8 @@ export class OrderFormComponent implements OnInit {
 
   formSubmit(form: FormGroup) {
     if (form.valid) {
-      console.log(form)
       this.layoutService.create<Order>(this.formService.transformFormValueToCreateObject<Order, OrderStatus>(form, 'open'))
+      form.reset()
     } else {
       this.formService.highlightInvalidFields(form)
     }

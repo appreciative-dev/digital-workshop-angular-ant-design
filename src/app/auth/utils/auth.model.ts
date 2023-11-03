@@ -1,5 +1,5 @@
 export interface User {
-  id: string
-  name: string
-  timestamp: Date
+  id?: string
+  name?: string
+  timestamp?: Date
 }

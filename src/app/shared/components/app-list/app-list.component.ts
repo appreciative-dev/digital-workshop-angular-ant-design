@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core'
+import { Component, Input } from '@angular/core'
 import { Observable } from 'rxjs'
 
 @Component({
@@ -9,6 +9,4 @@ import { Observable } from 'rxjs'
 export class ListComponent {
   @Input()
   listData$: Observable<any>
-  @Output()
-  getDetails = new EventEmitter()
 }

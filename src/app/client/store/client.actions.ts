@@ -1,18 +1,12 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store'
 import { Client, ClientStatus } from '../utils/client.model'
-import {
-  Log,
-  RepositoryRequest,
-  RepositoryRequestQuery,
-  RepositoryEntityAction,
-  RepositoryResponseEntity,
-} from 'src/app/shared/repository/repository.model'
+import { Log, RepositoryRequest, RepositoryRequestQuery, RepositoryEntityAction } from 'src/app/shared/repository/repository.model'
 
 export const ClientActions = createActionGroup({
   source: 'CLIENTS',
   events: {
     'Create Client': props<{ item: Client }>(),
-    'Create Client Success': props<{ response: RepositoryResponseEntity; total: number }>(),
+    'Create Client Success': props<{ response: string; total: number }>(),
     'Update Client': props<{ item: Client; log: Log<Client> }>(),
     'Update Client Status': props<{ id: string; status: ClientStatus }>(),
     'Update Client Success': emptyProps(),

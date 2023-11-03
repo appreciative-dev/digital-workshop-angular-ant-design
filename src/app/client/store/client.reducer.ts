@@ -7,7 +7,7 @@ import { formatPaginationData } from 'src/app/shared/repository/repository.utils
 
 export interface State {
   client: Client
-  formUploadState: FormUploadState<RepositoryResponseEntity>
+  formUploadState: FormUploadState<string>
   listDownloadState: FormUploadState<RepositoryResponseEntity>
   clients: RepositoryResponseList<Client>
   listResponseType: any

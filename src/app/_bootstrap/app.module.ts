@@ -7,11 +7,9 @@ import { AngularFireModule } from '@angular/fire/compat'
 import { AngularFireAuthModule } from '@angular/fire/compat/auth'
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore'
 import { AngularFireStorageModule } from '@angular/fire/compat/storage'
-import { FIREBASE_CONFIG } from './utils/firebase.config'
+import { firebaseConfig } from './utils/firebase.config'
 import { CommonModule, registerLocaleData } from '@angular/common'
 import en from '@angular/common/locales/en'
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
-import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 import { AppRoutingModule } from './app-routing.module'
 import { SharedModule } from '../shared/shared.module'
 import { NavbarComponent } from './components/navbar/navbar.component'
@@ -23,7 +21,6 @@ import { AuthInterceptor, ErrorInterceptor } from '../auth/services/interceptor.
 import { ServiceWorkerModule } from '@angular/service-worker'
 
 registerLocaleData(en)
-const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http)
 
 @Component({
   selector: 'app-root',
@@ -42,14 +39,7 @@ export class AppComponent {}
     ReactiveFormsModule,
     AppRoutingModule,
     SharedModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: httpLoaderFactory,
-        deps: [HttpClient],
-      },
-    }),
-    AngularFireModule.initializeApp(FIREBASE_CONFIG),
+    AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFirestoreModule,

@@ -22,7 +22,7 @@
     ]
   },
   {
-    "key": "user",
+    "key": "name",
     "type": "text",
     "label": "User",
     "placeholder": "eg. name or other personal data",
@@ -64,45 +64,5 @@
         "value": 100
       }
     ]
-  },
-  {
-    "key": "cords",
-    "type": "text",
-    "label": "Coordinates",
-    "placeholder": "land and lat, eg. -27.440549, -48.364979",
-    "validations": [
-      {
-        "name": "required",
-        "message": "required"
-      },
-      {
-        "name": "minlength",
-        "message": "min 10 symbols",
-        "value": 10
-      },
-      {
-        "name": "maxlength",
-        "message": "max 10 symbols",
-        "value": 10
-      }
-    ]
-  },
-  {
-    "key": "price",
-    "type": "Price",
-    "label": "",
-    "placeholder": "without decimal, eg. 200",
-    "validations": [
-      {
-        "name": "required",
-        "message": "required"
-      },
-      {
-        "name": "min",
-        "message": "min 3 digits",
-        "value": 3
-      }
-    ],
-    "options": ["USDT", "BTC", "BDA", "MDM"]
   }
 ]

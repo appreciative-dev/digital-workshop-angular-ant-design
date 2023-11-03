@@ -6,15 +6,12 @@ import { AuthService } from './auth.service'
   providedIn: 'root',
 })
 export class AuthGuard {
-  authState: boolean
-
   constructor(private router: Router, private authService: AuthService) {}
-
   canActivate() {
     if (this.authService?.user) {
       return true
     } else {
-      // this.router.navigate(['auth/login'])
+      // this.router.navigate(['auth'])
       // return false
       return true
     }

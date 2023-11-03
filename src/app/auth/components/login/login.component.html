@@ -2,10 +2,9 @@
   <div class="login__container">
     <div class="login__title">Digital Workshop</div>
     <input class="login__input" type="text" nzSize="large" nz-input [formControl]="user" />
-    <button class="login__button" (click)="login()">LOGIN</button>
+    <button class="login__button" [disabled]="isDisabled" (click)="login()">LOGIN</button>
     <div class="login__error">
-      <!-- <span>please enter your name</span> -->
-      <span *ngIf="hasError" [@fadeInOnEnter]>please enter your name</span>
+      <span *ngIf="hasRequiredError" [@fadeInOnEnter]>please enter your name</span>
     </div>
   </div>
 </div>
