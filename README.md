@@ -1,7 +1,6 @@
 # Digital Workshop
 
-User could login and add clients with related vehicles. Clients could be modified (changing name, edit existed and add new vehicles). It is possible to create a report of all changes made with a client.
-Table layout is available to switch between different statuses of Client, changing page, page size, sorting.
+User could login and add clients with related vehicles. Clients could be modified (changing name, edit existed and add new vehicles). It is possible to create a report of all changes made with a client. Table layout is available to switch between different statuses of Client, changing page, page size, sorting. User could look for various spares through third-party API.
 
 ## Live demo
 
@@ -21,3 +20,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 | State manager  | NgRx                   |
 | Unsubscription | repository.utils.ts:15 |
 | Coding technic | reactive declarative   |
+
+## Utility libraries
+
+rxjs, tailwindcss, angular-animations, jspdf, jspdf-autotable, moment, ngx-mask

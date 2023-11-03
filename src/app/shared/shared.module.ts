@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { CommonModule } from '@angular/common'
 import { RouterModule } from '@angular/router'
-import { TranslateModule } from '@ngx-translate/core'
 import { MouseOnHoverDirective } from './services/mouse-on-hover.directive'
 import { NgZorroAntdModule } from './design-system/ng-zorro.module'
 import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n'
@@ -43,7 +42,7 @@ import { ListComponent } from './components/app-list/app-list.component'
     FormComponent,
     ListComponent,
   ],
-  imports: [RouterModule, CommonModule, NgZorroAntdModule, FormsModule, ReactiveFormsModule, TranslateModule],
+  imports: [RouterModule, CommonModule, NgZorroAntdModule, FormsModule, ReactiveFormsModule],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
     { provide: NZ_ICONS, useValue: antDesignIcons },

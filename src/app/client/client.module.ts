@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router'
 import { StoreModule } from '@ngrx/store'
 import { EffectsModule } from '@ngrx/effects'
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask'
-import { TranslateModule } from '@ngx-translate/core'
 import { SharedModule } from '../shared/shared.module'
 import { ClientRoutingModule } from './client-routing.module'
 import { reducer } from './store/client.reducer'
@@ -24,7 +23,6 @@ import { ClientLayoutComponent } from './components/client-layout/client-layout.
     ReactiveFormsModule,
     FormsModule,
     ClientRoutingModule,
-    TranslateModule,
     SharedModule,
     NgxMaskDirective,
     NgxMaskPipe,
